@@ -1,3 +1,5 @@
+@.claude/AGENTS.md
+
 # Burnrate
 
 A personal finance tracker / tech sandbox built with Next.js 15, React 19, TypeScript, and Tailwind CSS v4.
@@ -19,6 +21,12 @@ pnpm e2e:headless # run e2e tests (playwright)
 pnpm lint         # eslint
 pnpm format       # prettier
 ```
+
+## Next.js MCP
+
+When starting work on a Next.js project, ALWAYS call the `init` tool from
+next-devtools-mcp FIRST to set up proper context and establish documentation
+requirements. Do this automatically without being asked.
 
 ## Conventions
 
