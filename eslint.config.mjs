@@ -1,11 +1,11 @@
-import * as fs from "fs"
 
+import eslintPluginNext from "@next/eslint-plugin-next"
 // https://github.com/francoismassart/eslint-plugin-tailwindcss/pull/381
 // import eslintPluginTailwindcss from "eslint-plugin-tailwindcss"
-import eslintPluginImport from "eslint-plugin-import"
-import eslintPluginNext from "@next/eslint-plugin-next"
+import eslintPluginImport from "eslint-plugin-import-x"
 import eslintPluginStorybook from "eslint-plugin-storybook"
 import typescriptEslint from "typescript-eslint"
+import * as fs from "fs"
 
 const eslintIgnore = [
   ".git/",
@@ -17,6 +17,7 @@ const eslintIgnore = [
   "*.min.js",
   "*.config.js",
   "*.d.ts",
+  "report-bundle-size.js",
 ]
 
 const config = typescriptEslint.config(
@@ -43,7 +44,7 @@ const config = typescriptEslint.config(
         callees: ["classnames", "clsx", "ctl", "cn", "cva"],
       },
 
-      "import/resolver": {
+      "import-x/resolver": {
         typescript: true,
         node: true,
       },
@@ -63,7 +64,7 @@ const config = typescriptEslint.config(
           ignoreDeclarationSort: true,
         },
       ],
-      "import/order": [
+      "import-x/order": [
         "warn",
         {
           groups: ["external", "builtin", "internal", "sibling", "parent", "index"],
