@@ -1,47 +1,64 @@
 import { cva, type VariantProps } from "class-variance-authority"
+import Link from 'next/link';
 
 import { twMerge } from "tailwind-merge"
 
-const button = cva(
+const buttonCVA = cva(
   [
     "justify-center",
     "inline-flex",
     "items-center",
-    "rounded-xl",
+    "rounded-lg",
     "text-center",
     "border",
-    "border-blue-400",
+    "border-transparent",
     "transition-colors",
     "delay-50",
+    "text-preset-4-bold",
+    "p-4",
+    "text-grey-900",
+    "pointer",
+    "cursor-pointer",
   ],
   {
     variants: {
       intent: {
-        primary: ["bg-blue-400", "text-white", "hover:enabled:bg-blue-700"],
-        secondary: ["bg-transparent", "text-blue-400", "hover:enabled:bg-blue-400", "hover:enabled:text-white"],
+        primary: ["bg-grey-900", "text-white", "hover:bg-grey-500"],
+        secondary: ["bg-white", "border-beige-500", "hover:border-transparent", "hover:bg-beige-100"],
+        tertiary: ["bg-transparent", "p-0", "text-preset-4", "hover:text-grey-500"],
+        destroy: ["bg-red", "hover:bg-red/80", "text-white"],
       },
-      size: {
-        sm: ["min-w-20", "h-full", "min-h-10", "text-sm", "py-1.5", "px-4"],
-        lg: ["min-w-32", "h-full", "min-h-12", "text-lg", "py-2.5", "px-6"],
-      },
-      underline: { true: ["underline"], false: [] },
+      disabled: {
+        false: null,
+        true: ["pointer-events-none", "opacity-50"],
+      }
     },
     defaultVariants: {
       intent: "primary",
-      size: "lg",
     },
   }
 )
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLAnchorElement>, VariantProps<typeof button> {
-  underline?: boolean
-  href: string
+export interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLAnchorElement | HTMLButtonElement>, 'type' | 'disabled'>, Omit<VariantProps<typeof buttonCVA>, 'disabled'> {
+  href?: string;
+  type?: 'link' | 'button';
+  disabled?: boolean;
 }
 
-export function Button({ className, intent, size, underline, ...props }: ButtonProps) {
+export function Button({ className, intent, disabled = false, href, type = 'button', ...rest }: ButtonProps) {
+  const props = {
+    className: twMerge(buttonCVA({ intent, disabled, className })),
+    'aria-disabled': disabled,
+    ...rest
+  }
+
+  if (type === 'link' && href) {
+    <Link {...props} href={href} />
+  }
+
   return (
-    <a className={twMerge(button({ intent, size, className, underline }))} {...props}>
+    <button {...props}>
       {props.children}
-    </a>
+    </button>
   )
 }

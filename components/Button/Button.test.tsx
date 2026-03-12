@@ -18,15 +18,4 @@ describe("Button", () => {
     expect(link).toHaveClass("bg-transparent")
     expect(link).toHaveClass("text-blue-400")
   })
-
-  it("applies correct size classes", () => {
-    const { container } = render(
-      <Button href="/test" size="sm">
-        Small
-      </Button>
-    )
-    const link = container.querySelector("a")
-    expect(link).toHaveClass("text-sm")
-    expect(link).toHaveClass("min-w-20")
-  })
 })
