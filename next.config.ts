@@ -2,6 +2,14 @@ import { type NextConfig } from "next"
 
 const config: NextConfig = {
   reactStrictMode: true,
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
+      },
+    },
+  },
   logging: {
     fetches: {
       fullUrl: true,
