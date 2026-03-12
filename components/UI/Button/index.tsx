@@ -45,7 +45,7 @@ export interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLAnchorE
   disabled?: boolean;
 }
 
-export function Button({ className, intent, disabled = false, href, type = 'button', ...rest }: ButtonProps) {
+export function Button({ className, intent = "primary", disabled = false, href, type = 'button', ...rest }: ButtonProps) {
   const props = {
     className: twMerge(buttonCVA({ intent, disabled, className })),
     'aria-disabled': disabled,
