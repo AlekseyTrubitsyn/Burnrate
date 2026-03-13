@@ -68,7 +68,7 @@ export const Default = {
       <div className="grid grid-cols-8 gap-6 max-w-3xl">
         {icons.map(({ icon: Icon, name }) => (
           <div key={name} className="flex flex-col items-center gap-2">
-            <Icon className="text-grey-900" />
+            <Icon className="text-grey-900 size-6" />
             <span className="text-preset-5 text-grey-500 text-center">{name}</span>
           </div>
         ))}
