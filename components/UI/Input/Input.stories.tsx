@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs"
+import { SearchIcon } from "lucide-react"
 import { Input } from "."
 
 const meta: Meta<typeof Input> = {
@@ -38,6 +39,16 @@ export const Invalid: Story = {
 export const Password: Story = {
   render: (args) => <Input {...args} />,
   args: { type: "password", placeholder: "Password" },
+}
+
+export const WithSearchIcon: Story = {
+  render: (args) => <Input {...args} endAdornment={<SearchIcon className="size-4" />} />,
+  args: { placeholder: "Search...", label: "Search", description: undefined },
+}
+
+export const WithDollarSign: Story = {
+  render: (args) => <Input {...args} startAdornment={<span className="text-preset-4">$</span>} />,
+  args: { placeholder: "0.00", label: "Amount", type: "number", description: undefined },
 }
 
 export default meta
